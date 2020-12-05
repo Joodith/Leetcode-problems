@@ -1,0 +1,15 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        result=0
+        p=[]
+        v=[]
+        op=['+','-','*','/']
+        for i in tokens:
+            if i in op:
+                num2=p.pop()
+                num1=p.pop()
+                res=int(eval(str(num1)+i+str(num2)))
+                p.append(res)
+            else:
+                p.append(int(i))
+        return p[0]
