@@ -1,0 +1,22 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        wd=s
+        c=0
+        result=""
+        if len(s)==1:
+            return s
+        for start in range(0,len(s)-1):
+            for end in range(start+1,len(s)):
+                w=wd[start:end+1]
+                if start==0:
+                    rev=wd[end::-1]
+                else:
+                    rev=wd[end:start-1:-1]
+                if w==rev and len(w)>len(result):
+                    result=w
+                else:
+                    if result=="":
+                        result=wd[start]
+      
+        return result
+        
