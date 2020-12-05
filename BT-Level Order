@@ -1,0 +1,45 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        p=[]
+        l=[]
+        h=self.find_height(root)
+        if h==0:
+            if root!=None:
+                p.append(root.val)
+                l.append(p)
+                return l
+            else:
+                return []
+        
+        for i in range(1,h+2):
+            p=self.traverse(root,i)
+            l.append(p)
+        return l
+    def find_height(self,root):
+        if root==None:
+            ht=0
+        elif root.left==None and root.right==None:
+            ht=0
+        else:
+            ht=max(self.find_height(root.left),self.find_height(root.right))+1
+        return ht
+    def traverse(self,root,d):
+        l=[]
+        v=[]
+        if root==None:
+            return v
+        if d==1:
+            l.append(root.val)
+
+        else:
+            l=self.traverse(root.left,d-1)+self.traverse(root.right,d-1)
+
+        
+        return l
+            
