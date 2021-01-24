@@ -1,0 +1,27 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        def comb(temp_arr,tar,cur,res):
+            if tar==0:
+                print(list(temp_arr))
+                res.append(list(temp_arr))
+                return
+            for i in range(cur,len(candidates)):
+                if i>cur and candidates[i]==candidates[i-1]:
+                    continue
+                elem=candidates[i]
+                if tar-elem<0:
+                    break
+                temp_arr.append(elem)
+                comb(temp_arr,tar-elem,i+1,res)
+                temp_arr.pop()
+        
+                
+        candidates.sort()
+        temp_arr,res=[],[]
+        comb(temp_arr,target,0,res)
+        v=[]
+        
+            
+        return res
+        
+                
