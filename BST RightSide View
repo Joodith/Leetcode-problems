@@ -1,0 +1,13 @@
+class Solution:
+    def rightSideView(self, root: TreeNode) -> List[int]:
+
+        def rightside(node,level):
+            if not node:
+                return 
+            if len(ans)<=level:
+                ans.append(node.val)
+            rightside(node.right,level+1)
+            rightside(node.left,level+1)
+        ans=[]
+        rightside(root,0)
+        return ans
