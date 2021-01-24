@@ -1,0 +1,48 @@
+def find(num,size,res):
+    p=[size]*num
+    print(p)
+    i=0
+    win=0
+    new_l=[]
+    while len(p)!=0 and i<len(p):
+        
+        s=1
+        if s>=res:
+            p[i]=1
+        else:
+            k=p[i]//2
+            key=False
+            while k!=0:
+                if k==1:
+                    key=False
+                    break
+                elif p[i]%k==0 and p[i]//k>=res:
+                    p[i]=p[i]//k
+                    new_l=[p[i]]*(k-1)
+                    p+=[p[i]]*(k-1)
+                    print(p)
+                    win+=1
+                    key=True
+                    break
+                else:
+                    k-=1
+        if not key:
+            p.pop(i)
+            for o in p:
+                if o==p[i]:
+                    p.remove(o)
+
+
+    if win%2==0:
+        return "Havanese"
+    else:
+        return "Bernard"
+
+
+t=int(input())
+l=[]
+for i in range(t):
+    a,b,c=list(map(int,input().strip().split()))
+    l.append(find(a,b,c))
+for j in l:
+    print(j)
