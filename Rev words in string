@@ -1,0 +1,17 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        
+        words=s.split(' ')
+        rever=""
+        
+            
+        while len(words)!=1:
+            r=words.pop()
+            rever+=" "+r
+            rever=rever.rstrip()
+        if len(words)==1:
+            rever+=" "+words.pop()
+        rever=rever.strip()
+       
+        return rever
+        
