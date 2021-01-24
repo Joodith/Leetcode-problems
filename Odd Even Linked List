@@ -1,0 +1,20 @@
+class Solution:
+    def oddEvenList(self, head: ListNode) -> ListNode:
+        if head==None:
+            return None
+        odd_start=head
+        os=head
+        if odd_start!=None:
+            even_start=odd_start.next
+            es=odd_start.next
+        while odd_start.next!=None and even_start.next!=None:
+            if even_start.next!=None:
+                odd_start.next=even_start.next
+            if even_start.next!=None:
+                even_start.next=odd_start.next.next
+            odd_start=odd_start.next
+            even_start=even_start.next
+            
+        odd_start.next=es
+        return os
+        
