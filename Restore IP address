@@ -1,0 +1,28 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        
+        def valid_ip(ret,s,parts):
+            if len(parts)==4:
+                if s=="":
+                    ret.append ('.'.join(parts))
+                    return
+            if not s:
+                return
+            if s[0]=='0':
+                temp=parts[::]
+                temp.append("0")
+                valid_ip(ret,s[1:],temp)
+                return
+            for i in range(len(s)):
+                if i>=3:
+                    break
+                if int(s[:i+1])<=255:
+                    temp=parts[::]
+                    temp.append(s[:i+1])
+                    valid_ip(ret,s[i+1:],temp)
+        if len(s)>12:
+            return []
+        ret=[]
+        valid_ip(ret,s,[])
+        return ret
+        
