@@ -1,0 +1,44 @@
+def form(p):
+    arr=list(tuple(p))
+    arr.sort()
+    k=[]
+    w=[]
+    max_tot=0
+    print(arr)
+    for i in range(len(arr)):
+        if i%3==0:
+            if len(k)!=0:
+                w.append(k)
+                k=[]
+                k.append(arr[i])
+            else:
+                k.append(arr[i])
+                
+        elif i%3==1 or i%3==2:
+            k.append(arr[i])
+    w.append(k)
+    print(w)
+    if len(w)==1:
+        max_tot=w[0][1]
+    for i in range(len(w)-1):
+        p,q=w[i],w[i+1]
+        a=w[i]
+        b=w[i+1]
+        max_s=a[1]+b[1]
+        for j in range(len(b)):
+            if a[2]>b[j]:
+                continue
+            else:
+                r=a[1]
+                a[1]=a[2]
+                a[2]=b[j]
+                b[j]=r
+                b.sort()
+                if a[1]+b[1]>=max_s:
+                    max_s=a[1]+b[1]
+                else:
+                    a,b=p,q
+                    break
+        print(a,b)
+        max_tot+=max_s
+    return max_tot
