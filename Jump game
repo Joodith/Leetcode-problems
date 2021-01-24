@@ -1,0 +1,36 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        i=0
+        max_reach=0
+        count=0
+        while i<len(nums):
+            max_reach=nums[i]
+            if max_reach==0 and len(nums)==1:
+                return True
+            if i+max_reach<len(nums):
+                if nums[i+max_reach]!=0:
+                    i+=max_reach
+                else:
+                    count=0
+                    if i+max_reach==len(nums)-1:
+                        return True
+                    v=nums[i+1:i+max_reach]
+                    if len(v)!=0 and max(v)>=nums[i]:
+                        
+                        i+=max_reach+1
+                        print(i)
+                    else:
+                        s=0
+                        for k in range(i-1,-1,-1):
+                            if k+nums[k]>i+max_reach:
+                                i+=max_reach+1
+                                s+=1
+                                
+                        if s==0:
+                            return False
+            else:
+                return True
+        if count==max_reach-1:
+            return False
+        else:
+            return True
