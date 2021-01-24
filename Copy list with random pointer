@@ -1,0 +1,32 @@
+class Solution:
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        current_node=head
+        if head==None:
+            return None
+        while current_node!=None:
+            new_node=Node(current_node.val)
+            new_node.next=current_node.next
+            current_node.next=new_node
+            current_node=new_node.next
+        
+        
+        current_node=head
+        while current_node!=None and current_node.next!=None:
+            if current_node.random!=None:
+                current_node.next.random=current_node.random.next
+            else:
+                current_node.next.random=None
+            current_node=current_node.next.next
+        
+        current_node=head
+        head=current_node.next
+        while current_node!=None and current_node.next!=None and current_node.next.next!=None:
+            temp=current_node.next.next
+            current_node.next.next=current_node.next.next.next
+            current_node.next=None
+            current_node.random=None
+            del current_node
+            current_node=temp
+        return head
+            
+            
