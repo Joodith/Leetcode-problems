@@ -1,0 +1,57 @@
+class Solution:
+    def flatten(self, head: 'Node') -> 'Node':
+        t=head
+        ans=[]
+       
+        while t:
+            
+            
+            if t.child==None:
+                if t.next!=None:
+                    t=t.next
+                else:
+                    if len(ans)!=0:
+                        p=ans.pop()
+                        if p!=None:
+                            t.next=p
+                            p.prev=t
+                            
+                        else:
+                            s=None
+                            if len(ans)!=0:
+                                s=ans.pop()
+                            while len(ans)!=0 and s==None:
+                                s=ans.pop()
+                            if s:
+                                t.next=s
+                                s.prev=t
+                        t=t.next      
+                               
+                                
+                            
+                       
+                        
+                        
+                    else:
+                        t=t.next
+                    
+                    
+               
+            else:
+                ans.append(t.next)
+                t.next=t.child
+                t.next.prev=t
+                t=t.next
+        r=head
+        while r:
+            print(r.val,end=" ")
+            if r.prev:
+                print(r.prev.val,end=" ")
+            if r.next:
+                print(r.next.val,end=" ")
+            print()
+            r.child=None
+            r=r.next
+        return head
+                
+                
