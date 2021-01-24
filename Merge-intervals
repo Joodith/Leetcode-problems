@@ -1,0 +1,17 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        stack=[]
+        intervals.sort(key=lambda x:x[0])
+        for i in range(0,len(intervals)):
+            if len(stack)==0:
+                stack.append(intervals[i])
+            else:
+                prev=stack[-1]
+                cur=intervals[i]
+                if cur[0]>prev[1]:
+                    stack.append(cur)
+                else:
+                    stack.pop()
+                    stack.append([prev[0],max(prev[1],cur[1])])
+        return stack
+            
